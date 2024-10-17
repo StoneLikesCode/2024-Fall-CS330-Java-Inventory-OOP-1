@@ -47,8 +47,17 @@ public class Armour extends Item {
     public Armour()
     {
         // Initialize all data members (including those inherited from Item)
+        super("",true);
+        this.durability = 0;
+        this.defense = 0;
+        this.element = "none";
+        this.material = "none";
+        this.modifier = "none";
+        this.modiferLevel = 0;
+        this.element = "none";
+        this.stackable = false;
     }
-
+    
     /**
      * Duplicate a piece of armour.
      *
@@ -57,6 +66,15 @@ public class Armour extends Item {
     public Armour(Armour src)
     {
         // Set and/or copy data members for *this* object based on *src*.
+        this.name = src.name;
+        this.durability = src.durability;
+        this.defense = src.defense;
+        this.element = src.element;
+        this.material = src.material;
+        this.modifier = src.modifier;
+        this.modiferLevel = src.modiferLevel;
+        this.element = src.element;
+        this.stackable = src.stackable;
     }
 
     /**
@@ -189,9 +207,13 @@ public class Armour extends Item {
     @Override
     public void read(Scanner snr)
     {
-        super.name   = snr.next();
-
-        // Complete this method
+        super.name = snr.next();
+        this.material = snr.next();
+        this.durability = snr.nextInt();
+        this.defense = snr.nextInt();
+        this.modifier = snr.next();
+        this.modiferLevel = snr.nextInt();
+        this.element = snr.next();
     }
 
     /**
@@ -200,8 +222,7 @@ public class Armour extends Item {
     @Override
     public Item clone()
     {
-        // Replace the next line
-        return null;
+        return new Armour(this);
     }
 
     /**
@@ -210,7 +231,19 @@ public class Armour extends Item {
     @Override
     public String toString()
     {
-        return "Implement This Function";
+        return String.format("  Nme: %s\n "       + 
+                             " Dur: %d\n " + 
+                             " Def: %d\n "    +
+                             " Mtl: %s\n "   +
+                             " Mdr: %s (Lvl %d)\n " + 
+                             " Emt: %s\n"    ,
+                             this.name          ,
+                             this.durability    ,
+                             this.defense       ,
+                             this.material      ,
+                             this.modifier      ,
+                             this.modiferLevel  ,
+                             this.element);
     }
 }
 
